@@ -4,12 +4,6 @@
 // tracking `node_modules`. If both of the above are true, the deploy will
 // proceed. If `.gitingore` is missing or `node_modules` is tracked, it will
 // exit with a message telling them to seek adult supervision
-const checkGitIgnore = `
- if !(git ls-files --error-unmatch node_modules) && [ -f .gitignore ];
-   then true;
-   else printf "\n\nWARNING: .gitignore is wrong or missing.
-   Ask an instructor for assistance!\n\n" && false; fi
-`
 
 const ghPagesList = [
   'index.html',
@@ -18,9 +12,6 @@ const ghPagesList = [
 ].join(' ')
 
 module.exports = {
-  'check-gitignore': {
-    command: checkGitIgnore
-  },
   'git-is-clean': {
     // `$(git status --porcelain)` will evaluate to the empty string if the
     // working directory is clean.
